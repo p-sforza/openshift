@@ -5,6 +5,13 @@ parted -s /dev/vdb mklabel msdos
 parted -s /dev/vdb mkpart primary ext4 0 100%
 mkfs.ext4 /dev/vdb1
 mkdir /srv/nfs
+
+grep -q "/dev/vdb1" /etc/fstab
+if [ $? -eq 1 ]
+then
+  echo "/dev/vdb1    /srv/nfs ext4    defaults    0    0" >> /etc/fstab
+fi
+
 mount /dev/vdb1 /srv/nfs
 mkdir -p /srv/nfs/{registry,vol1,vol2,vol3,es-storage}
 chmod -R 777 /srv/nfs/*
