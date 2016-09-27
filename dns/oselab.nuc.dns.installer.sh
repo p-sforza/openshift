@@ -18,8 +18,6 @@ systemctl disable firewalld
 systemctl enable iptables
 systemctl start iptables
 
-iptables-save > /etc/sysconfig/iptables
-
 lokkit --service=dns
 
 systemctl enable named
