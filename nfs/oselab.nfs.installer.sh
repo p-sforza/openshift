@@ -32,6 +32,7 @@ then
 cat << EOF >> /etc/fstab
 /dev/${NFS_VG_NAME}/${NFS_LV_NAME}        ${NFS_MNT_POINT}              xfs defaults 0 0
 EOF
+mkdir -p /var/nfs
 fi
 mount -a
 sleep 5
