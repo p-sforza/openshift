@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Configure your environment
-export NFS_DISK=/dev/vdb
-export NFS_PARTITION=/dev/vdb1
-export NFS_VG_NAME=vg-nfs
-export NFS_LV_NAME=lv-nfs
-export NFS_MNT_POINT=/var/nfs
-
 # Prepare the disk, assign it to LVM and create fs
 echo "--> Setting up disk..."
 sfdisk ${NFS_DISK} << EOF
