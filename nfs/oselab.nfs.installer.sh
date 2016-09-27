@@ -59,6 +59,7 @@ iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT
 iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 20048 -j ACCEPT
 iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 50825 -j ACCEPT
 iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 53248 -j ACCEPT
+iptales-save
 
 echo "--> Setting up services..."
 systemctl enable rpcbind nfs-server
