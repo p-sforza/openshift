@@ -26,7 +26,15 @@ then
 fi
 
 # Mount the Volume
+grep -q "/dev/${NFS_VG_NAME}/${NFS_LV_NAME}" /etc/fstab
+if [ $? -eq 1 ]
+then
+cat << EOF >> /etc/fstab
+/dev/${NFS_VG_NAME}/${NFS_LV_NAME}        ${NFS_MNT_POINT}              xfs defaults 0 0
+EOF
+fi
 mount -a
+sleep 5
 echo "--> Create local mounts..."
 mkdir -p ${NFS_MNT_POINT}/{registry,vol1,vol2,vol3,es-storage}
 chmod -R 777 ${NFS_MNT_POINT}/*
@@ -41,16 +49,7 @@ ${NFS_MNT_POINT}/vol2 *(insecure,rw,root_squash)
 ${NFS_MNT_POINT}/vol3 *(insecure,rw,root_squash)
 ${NFS_MNT_POINT}/es-storage *(insecure,rw,root_squash)
 EOF
-
-grep -q "/dev/${NFS_VG_NAME}/${NFS_LV_NAME}" /etc/fstab
-if [ $? -eq 1 ]
-then
-cat << EOF >> /etc/fstab
-/dev/${NFS_VG_NAME}/${NFS_LV_NAME}        ${NFS_MNT_POINT}              xfs defaults 0 0
-EOF
-fi
-
-
+exportfs -a
 
 # Setup firewall
 echo "--> Setting up firewall..."
