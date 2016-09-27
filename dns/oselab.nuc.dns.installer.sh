@@ -19,6 +19,7 @@ systemctl enable iptables
 systemctl start iptables
 
 lokkit --service=dns
+lokkit --service=ssh
 
 systemctl enable named
 systemctl stop named
