@@ -4,7 +4,7 @@ echo "--> Set some env"
 LOCAL_HOST=$(hostname)
 LOCAL_DOMAIN=$(dnsdomainname)
 LOCAL_FQDN=$(hostname -f)
-LOCAL_IP=$(hostname -I)
+LOCAL_IP=$(hostname -I | awk '{print $1}')
 DOMAIN_OSE_APP_KEYFILE=/var/named/${DOMAIN_OSE_APP}.key
 DOMAIN_OSE_HOST_KEYFILE=/var/named/${DOMAIN_OSE_HOST}.key
 
@@ -78,7 +78,7 @@ ${DOMAIN_OSE_HOST}               IN SOA ${LOCAL_FQDN}.  hostmaster.${LOCAL_DOMAI
                          MX      10 mail.${DOMAIN_OSE_HOST}.
 \$ORIGIN ${DOMAIN_OSE_HOST}.
 ${LOCAL_HOST}           A       127.0.0.1
-                        A       ${LOCAL_IP}
+                        A       ${LOCAL_DNS}
 \$TTL 180        ; 3 minutes
 EOF
 
