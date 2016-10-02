@@ -107,7 +107,11 @@ options {
   statistics-file "/var/named/data/named_stats.txt";
   memstatistics-file "/var/named/data/named_mem_stats.txt";
   allow-query { any; };
-  recursion no;
+  recursion yes;
+  forwarders {
+    ${COMPANY_DNS};
+    8.8.8.8;
+  };
   dnssec-enable yes;
   dnssec-validation yes;
   /* Path to ISC DLV key */
